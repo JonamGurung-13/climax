@@ -1,0 +1,133 @@
+<%@ page import="com.icp.climax.model.User" %>
+
+<%--
+  Created by IntelliJ IDEA.
+  User: jonam
+  Date: 5/9/2026
+  Time: 9:24 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climax Cinemas</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-logo">🎬 Climax Cinemas</div>
+    <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Movies</a></li>
+        <li><a href="#">Schedules</a></li>
+        <%
+            HttpSession s = request.getSession(false);
+            User loggedInUser = (s != null) ? (User) s.getAttribute("loggedInUser") : null;
+        %>
+
+        <%if (loggedInUser !=null){ %>
+        <li><a href="#"> <%= loggedInUser.getUsername()%></a></li>
+        <li><a href="${pageContext.request.contextPath}/logout" class="btn-register">Logout</a></li>
+        <%} else {%>
+        <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+        <li><a href="${pageContext.request.contextPath}/register" class="btn-register">Register</a></li>
+        <% } %>
+    </ul>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to Climax Cinemas</h1>
+        <p>Book your tickets for the latest movies in Pokhara</p>
+        <a href="#" class="btn-book">Book Now</a>
+    </div>
+</section>
+
+<section class="movies">
+    <h2>Now Showing</h2>
+    <div class="movie-grid">
+
+        <div class="movie-card">
+            <img class="movie-poster" src="images/Avatar.jpg" alt="Avatar">
+            <div class="movie-info">
+                <span class="badge">PG</span>
+                <h3>Avatar</h3>
+                <p>Sci-Fi | 2h 42m</p>
+                <a href="#" class="btn-ticket">Get Tickets</a>
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img class="movie-poster" src="images/Endgame.avif" alt="Avengers Endgame">
+            <div class="movie-info">
+                <span class="badge">PG</span>
+                <h3>Avengers: Endgame</h3>
+                <p>Action | 3h 2m</p>
+                <a href="#" class="btn-ticket">Get Tickets</a>
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img class="movie-poster" src="images/Fight Club.jpg" alt="Fight Club">
+            <div class="movie-info">
+                <span class="badge">R</span>
+                <h3>Fight Club</h3>
+                <p>Thriller | 2h 19m</p>
+                <a href="#" class="btn-ticket">Get Tickets</a>
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img class="movie-poster" src="images/Houseful.jpg" alt="Houseful">
+            <div class="movie-info">
+                <span class="badge">U</span>
+                <h3>Houseful</h3>
+                <p>Comedy | 2h 15m</p>
+                <a href="#" class="btn-ticket">Get Tickets</a>
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img class="movie-poster" src="images/Jerry on Top.jpg" alt="Jerry on Top">
+            <div class="movie-info">
+                <span class="badge">U</span>
+                <h3>Jerry on Top</h3>
+                <p>Comedy | 2h 5m</p>
+                <a href="#" class="btn-ticket">Get Tickets</a>
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img class="movie-poster" src="images/Kabir_Singh.jpg" alt="Kabir Singh">
+            <div class="movie-info">
+                <span class="badge">R</span>
+                <h3>Kabir Singh</h3>
+                <p>Romance | 2h 53m</p>
+                <a href="#" class="btn-ticket">Get Tickets</a>
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img class="movie-poster" src="images/Lucky the Racer.jpg" alt="Lucky the Racer">
+            <div class="movie-info">
+                <span class="badge">U</span>
+                <h3>Lucky the Racer</h3>
+                <p>Action | 2h 30m</p>
+                <a href="#" class="btn-ticket">Get Tickets</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer">
+    <p>© 2026 Climax Cinemas. All rights reserved.</p>
+    <p>Pokhara, Nepal</p>
+</footer>
+
+</body>
+</html>
