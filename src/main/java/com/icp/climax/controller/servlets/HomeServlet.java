@@ -34,12 +34,6 @@ public class HomeServlet extends HttpServlet {
                     }
                 }
             }
-            HttpSession updateSession = request.getSession(false);
-            if (updateSession == null || updateSession.getAttribute("loggedInUser") == null) {
-                response.sendRedirect(request.getContextPath()+"/login");
-                return;
-            }
-
         }
 
 

@@ -12,7 +12,9 @@ public class ValidationUtil {
 
     // 2. Validate if a string contains only letters
     public static boolean isAlphabetic(String value) {
-        return value != null && value.matches("^[a-zA-Z]+$");
+        boolean result = value != null && value.matches("^[a-zA-Z ]+$");
+        System.out.println(result);
+        return value != null && value.matches("^[a-zA-Z ]+$");
     }
 
     // 3. Validate if a string starts with a letter and is composed of letters and numbers

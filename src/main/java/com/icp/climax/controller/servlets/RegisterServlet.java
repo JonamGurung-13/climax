@@ -29,6 +29,7 @@ public class RegisterServlet extends HttpServlet {
         //name
         final boolean isValidName = !ValidationUtil.isNullOrEmpty(name)
                 && ValidationUtil.isAlphabetic(name) && name.length()>5;
+        System.out.println(isValidName);
         String errorName = isValidName? "" : "Name is not Proper!";
 
         //username

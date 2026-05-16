@@ -16,13 +16,13 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
         }
 
-        //delete remember me cookie
+        //delete cookie
         Cookie cookie = new Cookie("rememberUser","");
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);
 
-        response.sendRedirect(request.getContextPath()+"/index.jsp");
+        response.sendRedirect(request.getContextPath()+"/home");
     }
 
     @Override
