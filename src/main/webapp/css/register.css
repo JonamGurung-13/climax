@@ -86,7 +86,8 @@ body {
 }
 
 .name input,
-.username input,
+.phone_number input,
+.date_of_birth input,
 .email input,
 .password input,
 .confirm-password input {
@@ -99,7 +100,7 @@ body {
     margin-top: 8px;
 }
 
-.name, .username, .email, .password, .confirm-password {
+.name, .phone_number, .email, .password,.date_of_birth, .confirm-password {
     display: flex;
     flex-direction: column;
     align-items: flex-start;

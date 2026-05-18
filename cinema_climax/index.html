@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Climax Cinemas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-logo">Climax Cinemas</div>
+    <ul class="nav-center">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Show Timings</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#" class="btn-login">Login</a>
+      <a href="#" class="btn-register">Register</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-slides">
+     <div class="slide active" style="background-image: url('images/AvatarFireAsh.png')"></div>
+     <div class="slide" style="background-image: url('images/AvengerEndGame.png')"></div>
+     <div class="slide" style="background-image: url('images/Lali bajar.jpeg')"></div>
+     <div class="slide" style="background-image: url('images/Life Dyamage.png')"></div>
+     <div class="slide" style="background-image: url('images/Lucky the Racer.jpg')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <button class="hero-btn left" onclick="prevSlide()">&#8249;</button>
+    <button class="hero-btn right" onclick="nextSlide()">&#8250;</button>
+    <div class="hero-dots" id="heroDots"></div>
+  </section>
+
+  <section class="movies">
+  <h2>Now Showing</h2>
+  <div class="carousel-wrapper">
+    <button class="carousel-btn" onclick="slideLeft()">&#8249;</button>
+    <div class="movie-grid" id="movieGrid">
+
+      <div class="movie-card">
+        <img class="movie-poster" src="images/avatar-poster.jpg" alt="Avatar Fire and Ash">
+        <div class="movie-info">
+          <span class="badge">PG</span>
+          <h3>Avatar: Fire and Ash</h3>
+          <p>Sci-Fi | 2h 42m</p>
+          <p class="price">Rs. 350</p>
+          <a href="movie-detail.html" class="btn-ticket">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="movie-card">
+        <img class="movie-poster" src="images/endgame-poster.jpg" alt="Avengers Endgame">
+        <div class="movie-info">
+          <span class="badge">PG</span>
+          <h3>Avengers: Endgame</h3>
+          <p>Action | 3h 2m</p>
+          <p class="price">Rs. 350</p>
+          <a href="movie-detail.html" class="btn-ticket">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="movie-card">
+        <img class="movie-poster" src="images/Jerry on Top.jpg" alt="Jerry on Top">
+        <div class="movie-info">
+          <span class="badge">U</span>
+          <h3>Jerry on Top</h3>
+          <p>Comedy | 2h 5m</p>
+          <p class="price">Rs. 350</p>
+          <a href="movie-detail.html" class="btn-ticket">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="movie-card">
+        <img class="movie-poster" src="images/lali-poster.jpg" alt="Lali Bajar">
+        <div class="movie-info">
+          <span class="badge">PG</span>
+          <h3>Lali Bajar</h3>
+          <p>Social Drama | 2h 0m</p>
+          <p class="price">Rs. 350</p>
+          <a href="movie-detail.html" class="btn-ticket">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="movie-card">
+        <img class="movie-poster" src="images/life-poster.jpg" alt="Life Dyamage">
+        <div class="movie-info">
+          <span class="badge">PG</span>
+          <h3>Life Dyamage</h3>
+          <p>Drama | 2h 10m</p>
+          <p class="price">Rs. 350</p>
+          <a href="movie-detail.html" class="btn-ticket">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="movie-card">
+        <img class="movie-poster" src="images/lucky-poster.jpg" alt="Lucky the Racer">
+        <div class="movie-info">
+          <span class="badge">U</span>
+          <h3>Lucky the Racer</h3>
+          <p>Action | 2h 30m</p>
+          <p class="price">Rs. 350</p>
+          <a href="movie-detail.html" class="btn-ticket">Buy Now</a>
+        </div>
+      </div>
+
+    </div>
+    <button class="carousel-btn" onclick="slideRight()">&#8250;</button>
+  </div>
+</section>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4>🎬 Climax Cinemas</h4>
+        <p>Your ultimate movie experience in Pokhara</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Show Timings</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Pokhara, Nepal</p>
+        <p>info@climaxcinemas.com</p>
+        <p>+977 061-123456</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Climax Cinemas. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('heroDots');
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.onclick = () => goToSlide(i);
+      dotsContainer.appendChild(dot);
+    });
+
+    function updateSlider() {
+      slides.forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+      slides[current].classList.add('active');
+      document.querySelectorAll('.dot')[current].classList.add('active');
+    }
+
+    function nextSlide() {
+      current = (current + 1) % slides.length;
+      updateSlider();
+    }
+
+    function prevSlide() {
+      current = (current - 1 + slides.length) % slides.length;
+      updateSlider();
+    }
+
+    function goToSlide(index) {
+      current = index;
+      updateSlider();
+    }
+
+    setInterval(nextSlide, 4000);
+
+    function slideLeft() {
+      document.getElementById('movieGrid').scrollBy({
+        left: -250,
+        behavior: 'smooth'
+      });
+    }
+
+    function slideRight() {
+      document.getElementById('movieGrid').scrollBy({
+        left: 250,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+
+</body>
+</html>

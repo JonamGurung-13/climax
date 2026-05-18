@@ -2,6 +2,9 @@ package com.icp.climax.utilities;
 
 import jakarta.servlet.http.Part;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 public class ValidationUtil {
@@ -48,4 +51,52 @@ public class ValidationUtil {
     public static boolean doPasswordsMatch(String password, String retypePassword) {
         return password != null && password.equals(retypePassword);
     }
+
+    // 8. Validate if phone number is numeric
+    public static boolean isValidNumber(String number) {
+        return number != null && number.matches("^[0-9]+$");
+    }
+
+    //9. Validate if Date
+    public static boolean isValidDate(String dateOfBirth) {
+        try {
+            return dateOfBirth != null && LocalDate.parse(dateOfBirth) != null;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    //10. Validate if age is valid and before the current date
+    public static boolean isValidAge(String dateOfBirth){
+        try {
+            LocalDate dob = LocalDate.parse(dateOfBirth);
+            LocalDate today = LocalDate.now();
+            int age = Period.between(dob, today).getYears();
+            int minAge = 16;
+
+            return dob.isBefore(today) && age >= minAge;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    //11. Validation  message for invalid age (overloading)
+    public static String invalidAge(String dateOfBirth) {
+        try {
+            LocalDate dob = LocalDate.parse(dateOfBirth);
+            LocalDate today = LocalDate.now();
+            int age = Period.between(dob, today).getYears();
+
+            if (dob.isAfter(today)) {
+                return "Date of birth cannot be in the future!";
+            }
+            if (age < 16) {
+                return "You are not eligible! Age must be more than 16 years old";
+            }
+            return null;
+        } catch (DateTimeParseException e) {
+            return "Invalid date format!";
+        }
+    }
+
 }

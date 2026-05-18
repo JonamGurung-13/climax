@@ -19,18 +19,18 @@
 <body>
 
 <nav class="navbar">
-    <div class="nav-logo">🎬 Climax Cinemas</div>
+    <div class="nav-logo">Climax Cinemas</div>
     <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Movies</a></li>
-        <li><a href="#">Schedules</a></li>
+        <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact Us</a></li>
         <%
             HttpSession s = request.getSession(false);
             User loggedInUser = (s != null) ? (User) s.getAttribute("loggedInUser") : null;
         %>
 
         <%if (loggedInUser !=null){ %>
-        <li><a href="#"> <%= loggedInUser.getUsername()%></a></li>
+
         <li><a href="${pageContext.request.contextPath}/logout" class="btn-register">Logout</a></li>
         <%} else {%>
         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
@@ -40,11 +40,17 @@
 </nav>
 
 <section class="hero">
-    <div class="hero-content">
-        <h1>Welcome to Climax Cinemas</h1>
-        <p>Book your tickets for the latest movies in Pokhara</p>
-        <a href="#" class="btn-book">Book Now</a>
+    <div class="hero-slides">
+        <div class="slide active" style="background-image: url('${pageContext.request.contextPath}/resources/images/AvatarFireAsh.png')"></div>
+        <div class="slide" style="background-image: url('${pageContext.request.contextPath}/resources/images/AvengerEndGame.png')"></div>
+        <div class="slide" style="background-image: url('${pageContext.request.contextPath}/resources/images/Lali bajar.jpeg')"></div>
+        <div class="slide" style="background-image: url('${pageContext.request.contextPath}/resources/images/Life Dyamage.png')"></div>
+        <div class="slide" style="background-image: url('${pageContext.request.contextPath}/resources/images/Lucky the Racer.jpg')"></div>
     </div>
+    <div class="hero-overlay"></div>
+    <button class="hero-btn left" onclick="prevSlide()">&#8249;</button>
+    <button class="hero-btn right" onclick="nextSlide()">&#8250;</button>
+    <div class="hero-dots" id="heroDots"></div>
 </section>
 
 <section class="movies">
@@ -125,9 +131,32 @@
 </section>
 
 <footer class="footer">
-    <p>© 2026 Climax Cinemas. All rights reserved.</p>
-    <p>Pokhara, Nepal</p>
+    <div class="footer-content">
+        <div class="footer-col">
+            <h4>Climax Cinemas</h4>
+            <p>Your ultimate movie experience in Pokhara</p>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <p>Pokhara, Nepal</p>
+            <p>info@climaxcinemas.com</p>
+            <p>+977 061-123456</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Climax Cinemas. All rights reserved.</p>
+    </div>
 </footer>
+
+<script src="${pageContext.request.contextPath}/javascript/index.js"></script>
 
 </body>
 </html>

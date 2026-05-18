@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 @WebServlet (name="RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -20,27 +21,30 @@ public class RegisterServlet extends HttpServlet {
     protected  void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException, ServletException {
         //Get its values from the client
         final String name = request.getParameter("name");
-        final String username = request.getParameter("username");
         final String email = request.getParameter("email");
+        final String phoneNumber = request.getParameter("phoneNumber");
+        final String dateOfBirth = request.getParameter("dateOfBirth");
         final String password = request.getParameter("password");
         final String cfPassword = request.getParameter("cfPassword");
 
-        //Validation for each inputs
+        //Validation for each input
         //name
         final boolean isValidName = !ValidationUtil.isNullOrEmpty(name)
                 && ValidationUtil.isAlphabetic(name) && name.length()>5;
         System.out.println(isValidName);
         String errorName = isValidName? "" : "Name is not Proper!";
 
-        //username
-        final boolean isValidUsername = !ValidationUtil.isNullOrEmpty(username)
-                && ValidationUtil.isAlphanumericStartingWithLetter(username)
-                && username.length()>5;
-        String errorUsername = isValidUsername? "" : "Username is not Proper!";
-
         //email
         final boolean isValidMail = ValidationUtil.isValidEmail(email);
         String errorMail = isValidMail? "" : "Email is not Proper!";
+
+        //phoneNumber
+        final boolean isValidPhoneNumber = ValidationUtil.isValidNumber(phoneNumber) && phoneNumber.length()==10;
+        String errorPhone = isValidPhoneNumber? "" : "Phone number is not Proper!";
+
+        //dateOfBirth
+        final boolean isValidDateOFBirth = ValidationUtil.isValidDate(dateOfBirth) && ValidationUtil.isValidAge(dateOfBirth);
+        String errorDateOFBirth = isValidDateOFBirth? "" : ValidationUtil.invalidAge(dateOfBirth);
 
         //password
         final boolean isValidPassword = ValidationUtil.isValidPassword(password);
@@ -50,10 +54,11 @@ public class RegisterServlet extends HttpServlet {
         final boolean isValidCfPassword = ValidationUtil.doPasswordsMatch(password, cfPassword);
         String errorCfPassword = isValidCfPassword? "" : "Password does not match!";
 
-        String error = errorName + errorUsername + errorMail + errorPassword + errorCfPassword;
+        String error = errorName +errorPhone+ errorMail + errorPassword + errorCfPassword + errorDateOFBirth;
         request.setAttribute("error", error);
         request.setAttribute("erName",errorName);
-        request.setAttribute("erUsername",errorUsername);
+        request.setAttribute("erPhoneNumber",errorPhone);
+        request.setAttribute("erDateOfBirth",errorDateOFBirth);
         request.setAttribute("erEmail",errorMail);
         request.setAttribute("erPassword",errorPassword);
         request.setAttribute("erCfPassword",errorCfPassword);
@@ -67,10 +72,11 @@ public class RegisterServlet extends HttpServlet {
         else{
             //hashed password before storing
             String hashedPassword = PasswordUtil.getHashPassword(password);
+            LocalDate dob = LocalDate.parse(dateOfBirth);
 
             //create user entry on database users table
             final UserDAO  userDAO = new UserDAO();
-            int check = userDAO.insertUser(name,username,email,hashedPassword);
+            int check = userDAO.insertUser(name,email,phoneNumber,hashedPassword,dob);
             switch (check) {
                 case 1: //Case of successful login
                     response.sendRedirect(request.getContextPath()+"/login"); //redirect to login page

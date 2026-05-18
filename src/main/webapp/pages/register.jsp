@@ -11,9 +11,9 @@
 <nav class="navbar">
     <div class="nav-logo">🎬 Climax Cinemas</div>
     <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Movies</a></li>
-        <li><a href="#">Schedules</a></li>
+        <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact Us</a></li>
         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
         <li><a href="${pageContext.request.contextPath}/register" class="btn-register">Register</a></li>
     </ul>
@@ -32,10 +32,16 @@
             <input type="text" id="name" name="name" value="${empty erName ? param.name:''}" required>
         </div>
 
-        <div class="username">
-            <label for="username">Username:</label>
-            <input type="tel" id="username" name="username" value="${empty erUsername ? param.username:''}" required placeholder="name123...">
+        <div class="phone_number">
+            <label for="phone_number">Phone Number:</label>
+            <input type="tel" id="phone_number" name="phoneNumber" value="${empty erPhone ? param.phoneNumber:''}" required placeholder="98********">
         </div>
+
+        <div class="date_of_birth">
+            <label for="date_of_birth">Date of Birth:</label>
+            <input type="date" name="dateOfBirth" id="date_of_birth" value="${empty erDateOfBirth ? param.dateOfBirth:''}" required>
+        </div>
+
 
         <div class="email">
             <label for="email">Email Address:</label>
@@ -55,7 +61,7 @@
         <button type="submit" class="btn-login">Sign Up</button>
     </form>
 
-    <p class="register-link">Already have an account? <a href="Login.html">Login here</a></p>
+    <p class="register-link">Already have an account? <a href="${pageContext.request.contextPath}/login">Login here</a></p>
 </main>
 
 <footer class="footer">

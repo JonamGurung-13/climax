@@ -19,9 +19,9 @@
     <nav class="navbar">
         <div class="nav-logo">🎬 Climax Cinemas</div>
         <ul class="nav-links">
-            <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
-            <li><a href="#">Movies</a></li>
-            <li><a href="#">Schedules</a></li>
+            <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
             <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
             <li><a href="${pageContext.request.contextPath}/register" class="btn-register">Register</a></li>
         </ul>
@@ -51,7 +51,7 @@
             <button type="submit" class="btn-login">Sign In</button>
         </form>
         <br>
-        <p class="register-link">Don't have an account? <a href="Register.html">Register here</a></p>
+        <p class="register-link">Don't have an account? <a href="${pageContext.request.contextPath}/register">Register here</a></p>
     </div>
 <footer class="footer">
     <p>© 2026 Climax Cinemas. All rights reserved.</p>
